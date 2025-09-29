@@ -7,23 +7,18 @@
     "vscode": {
       "extensions": [
         "ms-python.python",
-        "saoudrizwan.claude-dev",
-        "ms-azuretools.vscode-containers",
-        "cweijan.vscode-database-client2",
         "ms-vscode-remote.remote-containers",
-        "ms-azuretools.vscode-docker",
         "jamesmaj.easy-icons",
         "usernamehw.errorlens",
-        "google.geminicodeassist",
         "mhutchie.git-graph",
         "donjayamanne.githistory",
         "github.vscode-pull-request-github",
+        "vsls-contrib.gitdoc",
         "eamodio.gitlens",
-        "oderwat.indent-rainbow",
-        "visualstudioexptteam.vscodeintellicode",
         "ms-toolsai.jupyter",
-        "sourcegraph.sourcegraph"
-
+        "saoudrizwan.claude-dev",
+        "foam.foam-vscode",
+        "codeium.codeium"
       ],
       "settings": {
         "editor.tabSize": 2,
