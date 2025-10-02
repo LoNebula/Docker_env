@@ -17,7 +17,6 @@
         "eamodio.gitlens",
         "ms-toolsai.jupyter",
         "saoudrizwan.claude-dev",
-        "foam.foam-vscode",
         "codeium.codeium"
       ],
       "settings": {
