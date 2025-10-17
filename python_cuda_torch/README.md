@@ -57,6 +57,9 @@ To get a shell inside the running container, execute the following command.
 ```bash
 docker compose exec app /bin/bash
 ```
+```bash
+docker compose exec app //bin/sh
+```
 
 # Verify GPU Access
 After entering the container, start Python and run the following code to check if PyTorch is correctly recognizing the GPU.
