@@ -57,6 +57,7 @@ To get a shell inside the running container, execute the following command.
 ```bash
 docker compose exec app /bin/bash
 ```
+If that doesn't work, try this:
 ```bash
 docker compose exec app //bin/sh
 ```
