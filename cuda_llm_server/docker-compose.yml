@@ -1,20 +1,48 @@
+# 'version'行は削除
 services:
-  # サービス名を自由に決めます (例: app, workspaceなど)
-  app:
-    # Dockerfileがある場所を指定してビルドする
-    build: .
-    # ホストのカレントディレクトリ(.)をコンテナの/workspaceにマウント
-    # ここで-vオプションと同じ設定ができます！
+  # 1. Ollama サーバー本体
+  ollama:
+    image: ollama/ollama
+    container_name: ollama
+    ports:
+      - "11434:11434"
     volumes:
-      - .:/workspace
-    # GPUを使えるようにする設定 (docker compose v2.3以降)
+      - ollama_data:/root/.ollama
+    restart: unless-stopped
     deploy:
       resources:
         reservations:
           devices:
             - driver: nvidia
-              count: all
               capabilities: [gpu]
-    # -it オプションと同じ設定
-    stdin_open: true # -i
-    tty: true        # -t
+              count: all
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:11434/api/tags"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # 2. 初回セットアップ用サービス (修正箇所)
+  init:
+    image: ollama/ollama
+    container_name: ollama-init
+    env_file: .env
+    depends_on:
+      ollama:
+        condition: service_healthy
+    volumes:
+      - ollama_data:/root/.ollama
+      # --- 修正点 ---
+      # init_models.sh ファイルをコンテナ内にマウントする
+      - ./init_models.sh:/init_models.sh
+    profiles:
+      - init
+    # --- 修正点 ---
+    # 複雑なスクリプトの代わりに、マウントしたファイルを実行するコマンドに変更
+    # 1. スクリプトに実行権限を付与 (chmod +x)
+    # 2. スクリプトを実行
+    command: ["/bin/bash", "-c", "chmod +x /init_models.sh && /init_models.sh"]
+
+volumes:
+  ollama_data:
+    driver: local
