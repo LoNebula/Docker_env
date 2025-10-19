@@ -1,6 +1,4 @@
-# 'version'行は削除
 services:
-  # 1. Ollama サーバー本体
   ollama:
     image: ollama/ollama
     container_name: ollama
@@ -8,34 +6,14 @@ services:
       - "11434:11434"
     volumes:
       - ollama_data:/root/.ollama
-    restart: unless-stopped
     deploy:
       resources:
         reservations:
           devices:
             - driver: nvidia
               capabilities: [gpu]
-              count: all
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:11434/api/tags"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-
-  # 2. 初回セットアップ用サービス (修正箇所)
-  init:
-    image: ollama/ollama
-    container_name: ollama-init
-    env_file: .env
-    depends_on:
-      ollama:
-        condition: service_healthy
-    volumes:
-      - ollama_data:/root/.ollama
-      - ./init_models.sh:/init_models.sh
-    profiles:
-      - init
-    command: ["/bin/bash", "-c", "chmod +x /init_models.sh && /init_models.sh"]
+              count: all # 'count: all' で全てのGPUを指定
+    restart: unless-stopped
 
 volumes:
   ollama_data:
