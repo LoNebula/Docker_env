@@ -32,15 +32,9 @@ services:
         condition: service_healthy
     volumes:
       - ollama_data:/root/.ollama
-      # --- 修正点 ---
-      # init_models.sh ファイルをコンテナ内にマウントする
       - ./init_models.sh:/init_models.sh
     profiles:
       - init
-    # --- 修正点 ---
-    # 複雑なスクリプトの代わりに、マウントしたファイルを実行するコマンドに変更
-    # 1. スクリプトに実行権限を付与 (chmod +x)
-    # 2. スクリプトを実行
     command: ["/bin/bash", "-c", "chmod +x /init_models.sh && /init_models.sh"]
 
 volumes:
