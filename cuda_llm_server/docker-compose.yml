@@ -1,20 +1,20 @@
 services:
-  ollama:
-    image: ollama/ollama
-    container_name: ollama
-    ports:
-      - "11434:11434"
+  # サービス名を自由に決めます (例: app, workspaceなど)
+  app:
+    # Dockerfileがある場所を指定してビルドする
+    build: .
+    # ホストのカレントディレクトリ(.)をコンテナの/workspaceにマウント
+    # ここで-vオプションと同じ設定ができます！
     volumes:
-      - ollama_data:/root/.ollama
+      - .:/workspace
+    # GPUを使えるようにする設定 (docker compose v2.3以降)
     deploy:
       resources:
         reservations:
           devices:
             - driver: nvidia
+              count: all
               capabilities: [gpu]
-              count: all # 'count: all' で全てのGPUを指定
-    restart: unless-stopped
-
-volumes:
-  ollama_data:
-    driver: local
+    # -it オプションと同じ設定
+    stdin_open: true # -i
+    tty: true        # -t
