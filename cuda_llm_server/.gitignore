@@ -1,55 +1,8 @@
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-
 # Virtual environments
 env/
 venv/
 .venv/
 ENV/
-.devcontainer/
-
-# Jupyter
-.ipynb_checkpoints/
-
-# Data / outputs (common for Kaggle projects)
-data/
-datasets/
-input/
-output/
-results/
-models/
-weights/
-*.csv
-*.tsv
-*.h5
-*.pth
-*.ckpt
-*.npz
-
-# Kaggle credentials
-kaggle.json
-
-# IDEs / editors / OS files
-.vscode/
-.idea/
-*.sublime-project
-*.sublime-workspace
-.DS_Store
-Thumbs.db
-desktop.ini
-
-# Logs, caches, build artifacts
-*.log
-*.tmp
-*.cache
-.pytest_cache/
-.mypy_cache/
-pip-wheel-metadata/
-dist/
-build/
-*.egg-info/
 
 # Secrets / config
 .env
@@ -59,6 +12,52 @@ credentials.json
 *.pem
 *.key
 
-# Coverage / docs
+# OS generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Testing and coverage
+.pytest_cache/
+.mypy_cache/
 htmlcov/
 coverage.xml
+
+# Logs and temporary files
+*.log
+*.tmp
+*.cache
+
+# Data and output directories (if not explicitly tracked)
+data/
+datasets/
+input/
+output/
+results/
+models/
+weights/
+
+# Build artifacts
+dist/
+build/
+*.egg-info/
+pip-wheel-metadata/
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# Common data/model files
+*.csv
+*.tsv
+*.h5
+*.pth
+*.ckpt
+*.npz
+
+# Windows run file
+.exe
