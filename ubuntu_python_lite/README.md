@@ -43,7 +43,7 @@ You may replace `my-python-app` with any image name you prefer.
 To start the container and automatically run `main.py`:
 
 ```bash
-docker run --rm -it my-python-app bash
+docker run --rm -it -v "$(Get-Location):/app" --name my-dev-container my-notebook-app bash
 
 
 ```
