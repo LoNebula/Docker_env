@@ -43,7 +43,9 @@ You may replace `my-python-app` with any image name you prefer.
 To start the container and automatically run `main.py`:
 
 ```bash
-docker run --rm -it my-python-app
+docker run --rm -it my-python-app bash
+
+
 ```
 
 Because the Dockerfile specifies:
